@@ -114,7 +114,7 @@ export default class CodeGenerator {
       }
     }
 
-    return result
+    return [result]
   }
 
   _setFrames (frameId, frameUrl) {
@@ -141,27 +141,34 @@ export default class CodeGenerator {
 
   _handleKeyDown (selector, value) {
     const block = new Block(this._frameId)
-    block.addLine({ type: domEvents.KEYDOWN, value: `await ${this._frame}.type('${selector}', '${value}')` })
+    // block.addLine({ type: domEvents.KEYDOWN, value: `await ${this._frame}.type('${selector}', '${value}')` })
+    block.addLine({ type: domEvents.KEYDOWN, value: `{ "action": "${this._frame}.type", "selector": "${selector}", "value": "${value}" },` })
+
     return block
   }
 
   _handleClick (selector) {
     const block = new Block(this._frameId)
     if (this._options.waitForSelectorOnClick) {
-      block.addLine({ type: domEvents.CLICK, value: `await ${this._frame}.waitForSelector('${selector}')` })
+      // block.addLine({ type: domEvents.CLICK, value: `await ${this._frame}.waitForSelector('${selector}')` })
+      block.addLine({ type: domEvents.CLICK, value: `{ "action": "${this._frame}.waitForSelector", "selector": "${selector}" },` })
     }
-    block.addLine({ type: domEvents.CLICK, value: `await ${this._frame}.click('${selector}')` })
+    // block.addLine({ type: domEvents.CLICK, value: `await ${this._frame}.click('${selector}')` })
+    block.addLine({ type: domEvents.CLICK, value: `{ "action": "${this._frame}.click", "selector": "${selector}" },` })
     return block
   }
   _handleChange (selector, value) {
-    return new Block(this._frameId, { type: domEvents.CHANGE, value: `await ${this._frame}.select('${selector}', '${value}')` })
+    // return new Block(this._frameId, { type: domEvents.CHANGE, value: `await ${this._frame}.select('${selector}', '${value}')` })
+    return new Block(this._frameId, { type: domEvents.CHANGE, value: `{ "action": "${this._frame}.select", "selector": "${selector}", "value": "${value}" },` })
   }
   _handleGoto (href) {
-    return new Block(this._frameId, { type: pptrActions.GOTO, value: `await ${this._frame}.goto('${href}')` })
+    // return new Block(this._frameId, { type: pptrActions.GOTO, value: `await ${this._frame}.goto('${href}')` })
+    return new Block(this._frameId, { type: pptrActions.GOTO, value: `{ "action": "${this._frame}.goto", "value": "${href}" },` })
   }
 
   _handleViewport (width, height) {
-    return new Block(this._frameId, { type: pptrActions.VIEWPORT, value: `await ${this._frame}.setViewport({ width: ${width}, height: ${height} })` })
+    // return new Block(this._frameId, { type: pptrActions.VIEWPORT, value: `await ${this._frame}.setViewport({ width: ${width}, height: ${height} })` })
+    return new Block(this._frameId, { type: pptrActions.VIEWPORT, value: `{ "action": "${this._frame}.setViewport", "value": { "width": ${width}, "height": ${height} } },` })
   }
 
   _handleScreenshot (options) {
