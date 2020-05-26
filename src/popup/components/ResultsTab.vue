@@ -1,12 +1,12 @@
 <template>
   <div class="tab results-tab">
     <div class="content">
-      <div class="generated-code">
-        <pre v-highlightjs="code" v-if="code"><code class="javascript"></code></pre>
-        <pre v-else>
-        <code>No code yet...</code>
-      </pre>
-      </div>
+      <button id="download" class="btn btn-sm btn-success">
+        <a style="color: #FFF; padding-left:auto; padding-right:auto" :href="ScriptData" :download="`Scenario_${Date.now()}.json`">Download</a>
+      </button>
+    </div>
+    <div style="text-align: 'center">
+
     </div>
   </div>
 </template>
@@ -15,6 +15,11 @@
     name: 'ResultsTab',
     props: {
       code: { type: String, default: '' }
+    },
+    computed: {
+      ScriptData(){
+        return "data:text/plain;charset=UTF-8,"  + encodeURIComponent(this.code);
+      }
     }
   }
 </script>

@@ -24,6 +24,12 @@ button {
       border-color: $brand-primary;
     }
 
+    &.btn-success {
+      color: #fff;
+      background-color: $brand-success;
+      border-color: $brand-success;
+    }
+
     &.btn-outline-primary {
       color: $brand-primary;
       background-color: transparent;

@@ -2,7 +2,7 @@
   <div id="puppeteer-recorder" class="recorder">
     <div class="header">
       <a href="#" @click="goHome">
-        Puppeteer recorder <span class="text-muted"><small>{{version}}</small></span>
+        Scenario recorder <span class="text-muted"><small>{{version}}</small></span>
       </a>
       <div class="left">
         <div class="recording-badge" v-show="isRecording">
@@ -12,7 +12,7 @@
         <a href="#" @click="toggleShowHelp" class="header-button">
           <img src="/images/help.svg" alt="help" width="18px">
         </a>
-        <a href="#" @click="openOptions" class="header-button">
+        <a v-if="false" href="#" @click="openOptions" class="header-button">
           <img src="/images/settings.svg" alt="settings" width="18px">
         </a>
       </div>
@@ -33,7 +33,6 @@
         <ResultsTab :code="code" :copy-link-text="copyLinkText" :restart="restart" :set-copying="setCopying" v-show="showResultsTab"/>
         <div class="results-footer" v-show="showResultsTab">
           <button class="btn btn-sm btn-primary" @click="restart" v-show="code">Restart</button>
-          <a href="#" v-clipboard:copy='code' @click="setCopying" v-show="code">{{copyLinkText}}</a>
         </div>
       </div>
       <HelpTab v-show="showHelp"></HelpTab>
