@@ -2,7 +2,7 @@
   <div id="puppeteer-recorder" class="recorder">
     <div class="header">
       <a href="#" @click="goHome">
-        Scenario recorder <span class="text-muted"><small>{{version}}</small></span>
+        User Journey Recorder <span class="text-muted"></span>
       </a>
       <div class="left">
         <div class="recording-badge" v-show="isRecording">
